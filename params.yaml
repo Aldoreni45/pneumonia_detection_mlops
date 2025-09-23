@@ -1,0 +1,11 @@
+AUGMENTATION: True
+IMAGE_SIZE: [224, 224, 3]
+BATCH_SIZE: 32  # Increased for stable gradients
+VALIDATION_SPLIT: 0.2
+INCLUDE_TOP: False
+EPOCHS: 1  # Increased from 1 - THIS IS THE MAIN ISSUE!
+CLASSES: 2
+WEIGHTS: imagenet
+LEARNING_RATE: 0.0001  # Decreased for fine-tuning
+FREEZE_TILL: 5  # Unfreeze last 5 layers instead of None
+FREEZE_ALL: False  # Changed from True to allow learning
