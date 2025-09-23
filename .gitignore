@@ -159,6 +159,36 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-artifacts/*
-data/*
-research\chest-xray-pneumonia.zip
+# Datasets and large files
+data/
+*.zip
+*.tar.gz
+*.rar
+
+# Artifacts (models, checkpoints)
+artifacts/
+*.h5
+*.ckpt
+*.pt
+*.pkl
+*.joblib
+
+# Logs
+logs/
+*.log
+*.out
+*.err
+*.txt
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+*.venv
+.venv/
