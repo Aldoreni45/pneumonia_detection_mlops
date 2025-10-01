@@ -1,0 +1,117 @@
+schema: '2.0'
+stages:
+  Data_Ingestion:
+    cmd: python src\pneumonia_detection\pipeline\stage_1.py
+    deps:
+    - path: config\config.yaml
+      hash: md5
+      md5: 1e3de436765cec6e9bef4cf332921db7
+      size: 1140
+    - path: params.yaml
+      hash: md5
+      md5: be69b44abd93460b9434f322ec2eda7d
+      size: 394
+    - path: src\pneumonia_detection\pipeline\stage_1.py
+      hash: md5
+      md5: f6e7d4ecbcf71860fdeb4dfaa3d4bf0b
+      size: 886
+    outs:
+    - path: artifacts/data_ingestion
+      hash: md5
+      md5: 418821c0fe3f0489b66d10748f7d37f0.dir
+      size: 2483915296
+      nfiles: 17591
+  Prepare_Base_Model:
+    cmd: python src\pneumonia_detection\pipeline\stage_2.py
+    deps:
+    - path: config\config.yaml
+      hash: md5
+      md5: 1e3de436765cec6e9bef4cf332921db7
+      size: 1140
+    - path: params.yaml
+      hash: md5
+      md5: be69b44abd93460b9434f322ec2eda7d
+      size: 394
+    - path: src\pneumonia_detection\pipeline\stage_2.py
+      hash: md5
+      md5: 3d12657575c936989997c854c4f6b10d
+      size: 1002
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: c7461803f07197cfd2d524bbc6f016cc.dir
+      size: 119420856
+      nfiles: 2
+  Model_Training:
+    cmd: python src\pneumonia_detection\pipeline\stage_3.py
+    deps:
+    - path: artifacts\data_ingestion\pneumonia\chest_xray\chest_xray\test
+      hash: md5
+      md5: 227ead8b20e5b527a0900911f54bbd19.dir
+      size: 79069091
+      nfiles: 625
+    - path: artifacts\data_ingestion\pneumonia\chest_xray\chest_xray\train
+      hash: md5
+      md5: ec967913ebbc3c55b412f60fdfc532b4.dir
+      size: 1154764220
+      nfiles: 5219
+    - path: artifacts\data_ingestion\pneumonia\chest_xray\chest_xray\val
+      hash: md5
+      md5: 624409d747735cc7ba24b0f995d52026.dir
+      size: 3061171
+      nfiles: 19
+    - path: artifacts\prepare_base_model\updated_base_model.h5
+      hash: md5
+      md5: 8979dca4add26dc9b7ad0ac862828615
+      size: 60500432
+    - path: config\config.yaml
+      hash: md5
+      md5: 1e3de436765cec6e9bef4cf332921db7
+      size: 1140
+    - path: params.yaml
+      hash: md5
+      md5: be69b44abd93460b9434f322ec2eda7d
+      size: 394
+    - path: src\pneumonia_detection\pipeline\stage_3.py
+      hash: md5
+      md5: ac097b415505f8956321002f95c7502d
+      size: 1063
+    outs:
+    - path: artifacts/training
+      hash: md5
+      md5: d751713988987e9331980363e24189ce.dir
+      size: 0
+      nfiles: 0
+    - path: models/model.h5
+      hash: md5
+      md5: e5ef8e28ec98da80c809f5bf66ea112c
+      size: 120311416
+  Model_Evaluation:
+    cmd: python src\pneumonia_detection\pipeline\stage_4.py
+    deps:
+    - path: artifacts\data_ingestion\pneumonia\chest_xray\chest_xray\val
+      hash: md5
+      md5: 624409d747735cc7ba24b0f995d52026.dir
+      size: 3061171
+      nfiles: 19
+    - path: config\config.yaml
+      hash: md5
+      md5: 1e3de436765cec6e9bef4cf332921db7
+      size: 1140
+    - path: models\model.h5
+      hash: md5
+      md5: e5ef8e28ec98da80c809f5bf66ea112c
+      size: 120311416
+    - path: params.yaml
+      hash: md5
+      md5: be69b44abd93460b9434f322ec2eda7d
+      size: 394
+    - path: src\pneumonia_detection\pipeline\stage_4.py
+      hash: md5
+      md5: feb1a24862ad212321c866bd4b6993de
+      size: 1056
+    outs:
+    - path: scores.json
+      hash: md5
+      md5: c13c6f7b540100dc5e4d6285d99d742c
+      size: 60

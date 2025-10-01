@@ -21,10 +21,10 @@ stages:
     cmd: python src\pneumonia_detection\pipeline\stage_3.py 
     deps:
       - src\pneumonia_detection\pipeline\stage_3.py
-      - artifacts\data_ingestion\chest_xray\train
-      - artifacts\data_ingestion\chest_xray\val
+      - artifacts\data_ingestion\pneumonia\chest_xray\chest_xray\train
+      - artifacts\data_ingestion\pneumonia\chest_xray\chest_xray\val
       - artifacts\prepare_base_model\updated_base_model.h5
-      - artifacts\data_ingestion\chest_xray\test
+      - artifacts\data_ingestion\pneumonia\chest_xray\chest_xray\test
       - config\config.yaml
       - params.yaml
     outs:
@@ -35,10 +35,10 @@ stages:
     cmd: python src\pneumonia_detection\pipeline\stage_4.py
     deps:
       - src\pneumonia_detection\pipeline\stage_4.py
-      - artifacts\data_ingestion\chest_xray\val
+      - artifacts\data_ingestion\pneumonia\chest_xray\chest_xray\val
       - models\model.h5
       - config\config.yaml
       - params.yaml
     metrics:
-      - scores.json:
-        cache: false
+      - scores.json
+

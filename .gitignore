@@ -192,3 +192,4 @@ __pycache__/
 .env
 *.venv
 .venv/
+/scores.json
